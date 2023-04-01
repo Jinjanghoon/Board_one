@@ -3,6 +3,8 @@ package com.study.board_one.service;
 import com.study.board_one.entity.Board1;
 import com.study.board_one.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +21,11 @@ public class BoardService {
     boardRepository.save(board);
   }
 
-  // 글리스트 처리
-  public List<Board1> boardlist() {
+  // 글 리스트
+  // 글 페이징 기능
+  public Page<Board1> boardlist(Pageable pageable) {
 
-    return boardRepository.findAll();
+    return boardRepository.findAll(pageable);
   }
 
   // 특정 게시글 불러오기
@@ -32,5 +35,12 @@ public class BoardService {
 
     return boardRepository.findById(id).get();
   }
+
+  // 게시글 삭제기능
+  public void boardDelete(Integer id) {
+
+    boardRepository.deleteById(id);
+  }
+
 
 }

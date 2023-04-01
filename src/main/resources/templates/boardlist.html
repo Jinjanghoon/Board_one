@@ -36,6 +36,11 @@ td {
   width:200px;
   text-align:center;
 }
+
+.pagebox {
+  text-align: center;
+  margin-top: 20px;
+}
 </style>
 <body>
   <div class="layout">
@@ -59,7 +64,14 @@ td {
         </tr>
       </tbody>
     </table>
-
   </div>
+
+  <div class="pagebox">
+    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+      <a th:if="${page != nowPage}" th:href="@{/list(page = ${page -1})}" th:text="${page}"></a>
+      <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+    </th:block>
+  </div>
+
 </body>
 </html>
